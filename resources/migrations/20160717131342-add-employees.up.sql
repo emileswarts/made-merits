@@ -3,7 +3,7 @@ INSERT into users (first_name, last_name) values
   ('Chris', 'BlackBurn'),
   ('David', 'Winter'),
   ('Emile', 'Swarts'),
-  ('Luke', 'Moreton')
+  ('Luke', 'Moreton'),
   ('Nick', 'Wood'),
   ('Richard', 'Foster')
   ('Rory', 'MacDonald'),
