@@ -18,3 +18,7 @@ SELECT * FROM users
 -- :doc retrieve a user given the id.
 SELECT * FROM users
 WHERE id = :id
+
+-- :name get-merits :? :*
+-- :doc retrieve all merits.
+SELECT * FROM merits
