@@ -10,12 +10,12 @@
     "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
 (defn merits-page []
-  (layout/render "merits.html" {:users (db/get-users)}))
+  (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
 
-(defn add-merits [id, reason]
+(defn add-merits [id reason]
   (layout/render "merits.html" {:users (db/get-users)}))
 
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/merits" [] (merits-page))
-  (POST "/merits" [] (add-merits)))
+  (POST "/merits" [id reason] (add-merits id reason)))

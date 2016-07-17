@@ -7,7 +7,12 @@
         <option value="{{user.id}}">{{user.first_name}}</option>
       {% endfor %}
     </select>
-    <input type="text" value="" />
+
+    <select name="merits">
+      {% for merit in merits %}
+        <option value="{{merit.id}}">{{merit.name}}</option>
+      {% endfor %}
+    </select>
     <input type="submit" value="Submit" />
   </form>
 {% endblock %}
