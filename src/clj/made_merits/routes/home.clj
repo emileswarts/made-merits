@@ -5,9 +5,9 @@
             [made-merits.db.core :as db]
             [clojure.java.io :as io]))
 
-(defn home-page []
+(defn leader-board []
   (layout/render
-    "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+    "leaderboard.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
 (defn merits-page []
   (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
@@ -17,6 +17,6 @@
   (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
+  (GET "/" [] (leader-board))
   (GET "/merits" [] (merits-page))
   (POST "/merits" [merit_id user_id] (add-merits merit_id user_id)))
