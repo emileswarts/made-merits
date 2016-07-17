@@ -15,6 +15,7 @@
                  [org.webjars/jquery "2.2.4"]
                  [org.clojure/tools.logging "0.3.1"]
                  [compojure "1.5.1"]
+                 [kerodon "0.8.0"]
                  [ring-webjars "0.1.1"]
                  [ring/ring-defaults "0.2.1"]
                  [mount "0.1.10"]
@@ -38,10 +39,7 @@
 
   :plugins [[lein-cprop "1.0.1"]
             [migratus-lein "0.3.9"]
-            [org.clojars.punkisdead/lein-cucumber "1.0.5"]
             [lein-immutant "2.1.0"]]
-  :cucumber-feature-paths ["test/clj/features"]
-
 
   :profiles
   {:uberjar {:omit-source true
@@ -62,7 +60,7 @@
                                  [clj-webdriver/clj-webdriver "0.7.2"]
                                  [org.seleniumhq.selenium/selenium-server "2.48.2"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.14.0"]]
-                  
+
                   :source-paths ["env/dev/clj" "test/clj"]
                   :resource-paths ["env/dev/resources"]
                   :repl-options {:init-ns user}
