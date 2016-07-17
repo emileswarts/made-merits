@@ -21,9 +21,9 @@
   (routes
     (-> #'merits-routes
         (wrap-routes middleware/wrap-csrf)
+        (wrap-basic-authentication authenticated?)
         (wrap-routes middleware/wrap-formats))
     (-> #'leaderboard-routes
-        (wrap-basic-authentication authenticated?)
         (wrap-routes middleware/wrap-formats))
     (route/not-found
       (:body
