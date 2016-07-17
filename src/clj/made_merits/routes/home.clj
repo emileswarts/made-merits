@@ -7,7 +7,7 @@
 
 (defn leader-board []
   (layout/render
-    "leaderboard.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+    "leaderboard.html" {:meritted-users (db/get-meritted-users)}))
 
 (defn merits-page []
   (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
