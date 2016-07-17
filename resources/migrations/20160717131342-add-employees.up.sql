@@ -5,7 +5,7 @@ INSERT into users (first_name, last_name) values
   ('Emile', 'Swarts'),
   ('Luke', 'Moreton'),
   ('Nick', 'Wood'),
-  ('Richard', 'Foster')
+  ('Richard', 'Foster'),
   ('Rory', 'MacDonald'),
   ('Scott', 'Mason'),
   ('Seb', 'Ashton');
