@@ -13,17 +13,17 @@
                 :start ((or (:init defaults) identity))
                 :stop  ((or (:stop defaults) identity)))
 
- (defn authenticated? [name pass]
+(defn authenticated? [name pass]
   (and (= name (System/getenv "HTTP_USERNAME"))
        (= pass (System/getenv "HTTP_PASSWORD"))))
 
 (def app-routes
   (routes
+    (-> #'leaderboard-routes
+        (wrap-routes middleware/wrap-formats))
     (-> #'merits-routes
         (wrap-routes middleware/wrap-csrf)
         (wrap-basic-authentication authenticated?)
-        (wrap-routes middleware/wrap-formats))
-    (-> #'leaderboard-routes
         (wrap-routes middleware/wrap-formats))
     (route/not-found
       (:body
