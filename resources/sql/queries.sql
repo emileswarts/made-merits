@@ -28,7 +28,7 @@ SELECT * FROM merits
 INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 
 -- :name get-meritted-users
--- :doc Add merit to user
+-- :doc Get users in the leaderboard
 SELECT
   u.first_name,
   SUM(m.value) as score
