@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-  <p>this is the story of made-merits... work in progress</p>
-  <a href="/merits/add">Add merit</a>
+<form action="/merits/add" method="post">
+  <select>
+    {% for user in users %}
+    <option value="{{user.id}}">{{user.first_name}}</option>
+    {% endfor %}
+  </select>
+  <input type="text" value="" />
+  <input type="submit" value="Submit" />
+</form>
 {% endblock %}
 
