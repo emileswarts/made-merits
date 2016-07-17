@@ -22,3 +22,7 @@ WHERE id = :id
 -- :name get-merits :? :*
 -- :doc retrieve all merits.
 SELECT * FROM merits
+
+-- :name add-merit-to-user :! :n
+-- :doc Add merit to user
+INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
