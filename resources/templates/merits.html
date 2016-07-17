@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="/merits/add" method="post">
-  <select>
-    {% for user in users %}
-    <option value="{{user.id}}">{{user.first_name}}</option>
-    {% endfor %}
-  </select>
-  <input type="text" value="" />
-  <input type="submit" value="Submit" />
-</form>
+  <form action="/merits" method="post">
+    {% csrf-field %}
+    <select name="users">
+      {% for user in users %}
+        <option value="{{user.id}}">{{user.first_name}}</option>
+      {% endfor %}
+    </select>
+    <input type="text" value="" />
+    <input type="submit" value="Submit" />
+  </form>
 {% endblock %}
-
