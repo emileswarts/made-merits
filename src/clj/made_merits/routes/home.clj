@@ -12,10 +12,11 @@
 (defn merits-page []
   (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
 
-(defn add-merits [id reason]
-  (layout/render "merits.html" {:users (db/get-users)}))
+(defn add-merits [merit_id user_id]
+  (db/add-merit-to-user {:merit_id merit_id :user_id user_id })
+  (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
 
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/merits" [] (merits-page))
-  (POST "/merits" [id reason] (add-merits id reason)))
+  (POST "/merits" [merit_id user_id] (add-merits merit_id user_id)))
