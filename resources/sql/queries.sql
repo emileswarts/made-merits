@@ -26,3 +26,19 @@ SELECT * FROM merits
 -- :name add-merit-to-user :! :n
 -- :doc Add merit to user
 INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
+
+-- :name get-meritted-users
+-- :doc Add merit to user
+SELECT
+  u.first_name, SUM(m.value)
+FROM
+  users u
+INNER JOIN
+  users_merits um
+ON
+  um.user_id = u.id
+INNER JOIN
+  merits m
+ON
+  m.id = um.merit_id
+GROUP BY u.id;
