@@ -1,5 +1,6 @@
-# made-merits
+# Made Merits
 
-## Welcome!
+## Welcome to Made Merits where the points don't matter!
 
-Copyright © 2016 FIXME
+
+Copyright © 2016
