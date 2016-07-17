@@ -42,4 +42,5 @@ INNER JOIN
   merits m
 ON
   m.id = um.merit_id
-GROUP BY u.id;
+GROUP BY u.id
+ORDER BY score DESC;
