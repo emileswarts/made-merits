@@ -31,3 +31,21 @@ body {
   }
 }
 
+.leader-board__users {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.leader-board__user {
+  background: white;
+  border: 1px solid #efefef;
+  list-style-type: none;
+  margin: 10px;
+  padding: 15px;
+  font-size: 1.5em;
+  border-radius: 10px;
+}
+
+.leader-board__user_score {
+  float: right;
+}
