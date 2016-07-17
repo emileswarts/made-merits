@@ -14,6 +14,7 @@
                  [org.webjars.bower/tether "1.3.3"]
                  [org.webjars/jquery "2.2.4"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [ring-basic-authentication "1.0.5"]
                  [compojure "1.5.1"]
                  [kerodon "0.8.0"]
                  [ring-webjars "0.1.1"]
