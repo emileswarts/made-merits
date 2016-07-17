@@ -5,4 +5,3 @@ Feature: Merits
     Given I on the merit add page
     And I add a merit to 'Bob'
     Then Bob should have a merit
-
