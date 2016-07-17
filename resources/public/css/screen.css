@@ -11,6 +11,7 @@ body {
 }
 .navbar-nav .nav-item {
   float: none;
+  margin-top: 9px;
 }
 .navbar-divider,
 .navbar-nav .nav-item+.nav-item,
