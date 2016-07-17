@@ -30,7 +30,8 @@ INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 -- :name get-meritted-users
 -- :doc Add merit to user
 SELECT
-  u.first_name, SUM(m.value)
+  u.first_name,
+  SUM(m.value) as score
 FROM
   users u
 INNER JOIN

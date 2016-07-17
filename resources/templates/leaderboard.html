@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  <ul>
+    {% for meritted_user in meritted_users %}
+      <li>{{meritted_user.first_name}} {{meritted_user.score}}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

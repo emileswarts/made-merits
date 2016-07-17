@@ -7,7 +7,7 @@
 
 (defn leader-board []
   (layout/render
-    "leaderboard.html" {:meritted-users (db/get-meritted-users)}))
+    "leaderboard.html" {:meritted_users (db/get-meritted-users)}))
 
 (defn merits-page []
   (layout/render "merits.html" {:users (db/get-users) :merits (db/get-merits)}))
