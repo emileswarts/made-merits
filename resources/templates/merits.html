@@ -2,15 +2,15 @@
 {% block content %}
   <form action="/merits" method="post">
     {% csrf-field %}
-    <select name="users">
+    <select name="user_id">
       {% for user in users %}
         <option value="{{user.id}}">{{user.first_name}}</option>
       {% endfor %}
     </select>
 
-    <select name="merits">
+    <select name="merit_id">
       {% for merit in merits %}
-        <option value="{{merit.id}}">{{merit.name}}</option>
+        <option value="{{merit.id}}">{{merit.name}} ({{merit.value}})</option>
       {% endfor %}
     </select>
     <input type="submit" value="Submit" />
