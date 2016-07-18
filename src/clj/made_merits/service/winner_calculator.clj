@@ -2,6 +2,13 @@
   (:require [clojure.set :as set]
             [clojure.walk :as walk]))
 
+(defn with-winner
+  [scored-users]
+  (let [users-with-status (with-status scored-users)]
+    (if (more-than-one-winner? users-with-status)
+      (mark-everyone-as-a-loser users-with-status)
+      users-with-status)))
+
 (defn- with-status
   [scored-users]
   (let [max-score (apply max (map :score scored-users))]
@@ -27,10 +34,3 @@
           (walk/keywordize-keys
             (frequencies
               (map :status users-with-status))))))
-
-(defn with-winner
-  [scored-users]
-  (let [users-with-status (with-status scored-users)]
-    (if (more-than-one-winner? users-with-status)
-      (mark-everyone-as-a-loser users-with-status)
-      users-with-status)))
