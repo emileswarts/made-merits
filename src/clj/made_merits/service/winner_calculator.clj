@@ -34,4 +34,3 @@
     (if (more-than-one-winner? users-with-status)
       (mark-everyone-as-a-loser users-with-status)
       users-with-status)))
-
