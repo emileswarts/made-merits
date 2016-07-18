@@ -8,5 +8,11 @@
                              {:name "Sally" :score 9}]
           expected-result [{:name "Fred" :score 10 :status "winner"}
                           {:name "Sally" :score 9 :status "loser"}]]
-      (println (with-winner users-with-scores))
+      (is (= expected-result (with-winner users-with-scores)))))
+
+  (testing "There can be only one"
+    (let [users-with-scores [{:name "Fred" :score 10}
+                             {:name "Sally" :score 10}]
+          expected-result [{:name "Fred" :score 10 :status "loser"}
+                           {:name "Sally" :score 10 :status "loser"}]]
       (is (= expected-result (with-winner users-with-scores))))))
