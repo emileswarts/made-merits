@@ -2,24 +2,35 @@
   (:require [clojure.set :as set]
             [clojure.walk :as walk]))
 
-(defn winners
-  [users-with-scores]
-  (let [max-score (apply max (map :score users-with-scores))]
-    (vec (map (fn [user-with-score]
-                (assoc user-with-score
+(defn- with-status
+  [scored-users]
+  (let [max-score (apply max (map :score scored-users))]
+    (vec (map (fn [scored-user]
+                (assoc scored-user
                        :status
-                       (if (= max-score (:score user-with-score))
+                       (if (= max-score (:score scored-user))
                          "winner"
                          "loser")))
-              users-with-scores))))
+              scored-users))))
+
+(defn- mark-everyone-as-a-loser
+  [users-with-status]
+  (map
+    (fn [user-with-status]
+      (assoc user-with-status :status "loser"))
+    users-with-status))
+
+(defn- more-than-one-winner?
+  [users-with-status]
+  (not= 1
+        (:winner
+          (walk/keywordize-keys
+            (frequencies
+              (map :status users-with-status))))))
 
 (defn with-winner
-  [users-with-scores]
-  (let [users-with-status (winners users-with-scores)]
-    (if (not= 1
-              (:winner
-                (walk/keywordize-keys
-                  (frequencies (map :status users-with-status)))))
-      (map (fn [user-with-status] (assoc user-with-status :status "loser"))
-           users-with-status)
+  [scored-users]
+  (let [users-with-status (with-status scored-users)]
+    (if (more-than-one-winner? users-with-status)
+      (mark-everyone-as-a-loser users-with-status)
       users-with-status)))
