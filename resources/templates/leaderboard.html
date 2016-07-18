@@ -3,7 +3,11 @@
   <ul class="leader-board__users">
     {% for meritted_user in meritted_users %}
       <li class="leader-board__user">
-        <span class="leader-board__user_name">{{meritted_user.first_name}}</span> <span class="leader-board__user_score">{{meritted_user.score}}</span>
+        <span class="leader-board__user_name">
+          {{meritted_user.first_name}}
+        </span>
+        <i class="leader-board__user_{{meritted_user.status}}">&nbsp;</i>
+        <span class="leader-board__user_score">{{meritted_user.score}}</span>
       </li>
     {% endfor %}
   </ul>

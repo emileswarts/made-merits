@@ -45,8 +45,17 @@ body {
   padding: 15px;
   font-size: 1.5em;
   border-radius: 10px;
+  position: relative;
 }
 
 .leader-board__user_score {
   float: right;
+}
+
+.leader-board__user_winner {
+  background: url('/img/king.png');
+  height: 32px;
+  left: -50px;
+  position: absolute;
+  width: 32px;
 }
