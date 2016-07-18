@@ -1,4 +1,4 @@
-# Made Merits ![Alt text](/resources/public/img/king.png?raw=true "")
+# ![Alt text](/resources/public/img/king.png?raw=true "") Made Merits
 
 ## Welcome to Made Merits where the points don't matter!
 
