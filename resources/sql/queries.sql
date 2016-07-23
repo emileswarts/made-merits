@@ -31,16 +31,16 @@ INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 -- :doc Get users in the leaderboard
 SELECT
   u.first_name,
-  SUM(m.value) as score
+  m.value as score,
+  um.created_at as meritted_on,
+  m.name as score_name
 FROM
   users u
-INNER JOIN
+LEFT JOIN
   users_merits um
 ON
   um.user_id = u.id
 INNER JOIN
   merits m
 ON
-  m.id = um.merit_id
-GROUP BY u.id
-ORDER BY score DESC;
+  m.id = um.merit_id;
