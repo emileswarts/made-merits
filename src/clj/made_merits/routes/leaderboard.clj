@@ -3,6 +3,7 @@
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
             [made-merits.db.core :as db]
+            [made-merits.service.leaderboard-users :as leaderboard-users]
             [clojure.java.io :as io]))
 
 (defn meritted-users

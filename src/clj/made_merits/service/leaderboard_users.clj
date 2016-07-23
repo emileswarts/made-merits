@@ -3,4 +3,4 @@
 
   (defn presentable
     [db-users]
-    (winner-calculator/with-winner (db/get-meritted-users)))
+    (winner-calculator/with-winner db-users))
