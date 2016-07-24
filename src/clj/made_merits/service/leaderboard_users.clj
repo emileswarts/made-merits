@@ -4,7 +4,7 @@
 
 (defn with-winner-first
   [scored-users-with-merits]
-  (reverse (sort-by #(= "winner" (:status %)) scored-users-with-merits)))
+  (reverse (sort-by :score scored-users-with-merits)))
 
 (defn presentable
   [db-users]
