@@ -2,6 +2,12 @@
     (:require [made-merits.service.winner-calculator :as winner-calculator]
               [made-merits.service.score-calculator :as score-calculator]))
 
-  (defn presentable
-    [db-users]
-    (winner-calculator/with-winner (score-calculator/with-score db-users)))
+(defn with-winner-first
+  [scored-users-with-merits]
+  (reverse (sort-by #(= "winner" (:status %)) scored-users-with-merits)))
+
+(defn presentable
+  [db-users]
+  (with-winner-first
+    (winner-calculator/with-winner
+      (score-calculator/with-score db-users))))
