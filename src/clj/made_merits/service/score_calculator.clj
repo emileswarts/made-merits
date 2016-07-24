@@ -2,12 +2,12 @@
 
 (defn- unique-users
   [users-with-merits]
-  (group-by :user_id users-with-merits))
+  (group-by :first_name users-with-merits))
 
 (defn- user-with-score
   [unique-user]
-  (hash-map :user_id (:user_id (first unique-user))
-            :merits (map #(dissoc % :user_id) unique-user)
+  (hash-map :first_name (:first_name (first unique-user))
+            :merits (map #(dissoc % :first_name) unique-user)
             :score (->> unique-user
                      (map :value)
                      (reduce +))))
