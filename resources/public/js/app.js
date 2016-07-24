@@ -5,4 +5,4 @@ $( document ).ready(function() {
     $('.leader-board__user-merits').hide();
     $($target).next('.leader-board__user-merits').toggle();
   });
-};
+});
