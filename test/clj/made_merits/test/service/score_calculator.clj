@@ -4,9 +4,11 @@
 
 (deftest with-score-test
   (testing "Sum up user merit scores"
-    (let [users [{:id 1, :merit-value 10} {:id 1, :merit-value 10} {:id 2, :merit-value 9}]
-          expected-result [{:id 1 :score 20 :merits }
-                          {:id 2 :merit-value 9}]]
-      (is (= expected-result (with-score users))))))
+    (let [users '({:user_id 1 :value 10 :name "made tea"}
+                 {:user_id 1 :value 10 :name "blog post on time"}
+                 {:user_id 2 :value 9 :name "made coffee"})
 
-; [:id 1 :name "Emile" :score 20 :merits [ {:name "foo" :value 10} ]
+          expected-result '({:user_id 1 :score 20 :merits [{:value 10 :name "made tea"} {:value 10 :name "blog post on time"}]}
+                           {:user_id 2 :score 9 :merits [{:value 9 :name "made coffee"}]})]
+
+      (is (= expected-result (with-score users))))))
