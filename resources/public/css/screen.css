@@ -62,3 +62,8 @@ body {
 li {
   list-style-type: none;
 }
+
+.leader-board__user-merits-date {
+  float: right;
+  margin-right: 20px;
+}

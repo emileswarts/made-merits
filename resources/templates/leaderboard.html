@@ -11,7 +11,12 @@
           <span class="leader-board__user_score">{{meritted_user.score}}</span>
         </div>
         <ul class="leader-board__user-merits">
-          <li>hi</li>
+          {% for merit in meritted_user.merits %}
+          <li>
+            <em>{{merit.merit_name}}</em>
+            <span class="leader-board__user-merits-date"><em>{{merit.created_at|date:shortDate}}</em></span>
+          </li>
+          {% endfor %}
         </ul>
       </li>
     {% endfor %}
