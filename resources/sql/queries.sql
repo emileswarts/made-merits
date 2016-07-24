@@ -30,8 +30,9 @@ INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 -- :name get-meritted-users
 -- :doc Get users in the leaderboard
 SELECT
+  u.id,
   u.first_name,
-  m.value as score,
+  m.value as merit_value,
   um.created_at as meritted_on,
   m.name as score_name
 FROM
