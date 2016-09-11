@@ -2,10 +2,14 @@
   (:require [clojure.data.json :as json]))
 
 (defn detect
-  [pr-payload]
-  (let [counted-result (boyscouting-count (json/read-str pr-payload))]
-  {:user "emileswarts" :boyscouting-count (if (nil? counted-result) 0 counted-result)}))
+  [project-prs-payload]
+  (let [counted-result (boyscouting-count (json/read-str project-prs-payload))]
+  (vec counted-result)))
 
 (defn boyscouting-count
   [prs]
-  (first (vals (into {} (filter #(true? (key %)) (frequencies (map #(.contains (get % "body") "🔥 ") prs)))))))
+  (map
+    #(hash-map :user (first %) :boyscouting-count (last %))
+    (frequencies (map #(get % "login")
+                      (map #(get % "user")
+                           (filter #(.contains (get % "body") "🔥 ") prs))))))
