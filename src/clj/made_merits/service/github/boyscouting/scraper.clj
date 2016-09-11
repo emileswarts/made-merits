@@ -15,5 +15,9 @@
 (defn results [] (map
     (fn [repo]
       (println (str "processing " repo))
-      (hash-map :project repo :results (detector/detect (:body (client/get (to-url repo))))))
+      (hash-map :project repo
+                :results (detector/detect
+                           (:body
+                             (client/get
+                               (to-url repo {:oauth-token ~(get (System/getenv) "GITHUB_OAUTH_SECRET")}))))))
     repos))
