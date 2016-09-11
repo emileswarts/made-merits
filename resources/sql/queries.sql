@@ -45,3 +45,12 @@ INNER JOIN
   merits m
 ON
   m.id = um.merit_id;
+
+-- :name user-id-from-github-username
+SELECT id FROM users where github_username = :github-username
+
+-- :name persist-boyscouting-results! :! :n
+INSERT INTO boyscouting (project, user_id, boyscouting_count) VALUES (:project, :user_id, :boyscouting_count)
+
+-- :name reset-boyscouting! :!
+Delete from boyscouting where 1;

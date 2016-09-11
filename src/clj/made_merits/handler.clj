@@ -3,6 +3,7 @@
             [made-merits.layout :refer [error-page]]
             [made-merits.routes.leaderboard :refer [leaderboard-routes]]
             [made-merits.routes.merits :refer [merits-routes]]
+            [made-merits.routes.github-boyscouting-scraper :refer [boyscouting-routes]]
             [compojure.route :as route]
             [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [made-merits.env :refer [defaults]]
@@ -20,6 +21,8 @@
 (def app-routes
   (routes
     (-> #'leaderboard-routes
+        (wrap-routes middleware/wrap-formats))
+    (-> #'boyscouting-routes
         (wrap-routes middleware/wrap-formats))
     (-> #'merits-routes
         (wrap-routes middleware/wrap-csrf)

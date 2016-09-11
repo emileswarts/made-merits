@@ -1,11 +1,6 @@
 (ns made-merits.service.github.boyscouting.detector
   (:require [clojure.data.json :as json]))
 
-(defn detect
-  [project-prs-payload]
-  (let [counted-result (boyscouting-count (json/read-str project-prs-payload))]
-  (vec counted-result)))
-
 (defn boyscouting-count
   [prs]
   (map
@@ -13,3 +8,8 @@
     (frequencies (map #(get % "login")
                       (map #(get % "user")
                            (filter #(.contains (get % "body") "🔥 ") prs))))))
+
+(defn detect
+  [project-prs-payload]
+  (let [counted-result (boyscouting-count (json/read-str project-prs-payload))]
+  (vec counted-result)))
