@@ -1,0 +1,14 @@
+--  COMMENTED BECAUSE YOU CANNOT RUN MULTIPLE SQL QUERIES IN ONE MIGRATION, LAME
+
+-- UPDATE users SET github_username = "emileswarts" where first_name = "Emile";
+-- UPDATE users SET github_username = "alex-min" where first_name = "Alex";
+-- UPDATE users SET github_username = "chrisblackburn" where first_name = "Chris";
+-- UPDATE users SET github_username = "davidwinter" where first_name = "David";
+-- UPDATE users SET github_username = "lukemorton" where first_name = "Luke";
+-- UPDATE users SET github_username = "nickwood" where first_name = "Nick";
+-- UPDATE users SET github_username = "zuren" where first_name = "Richard";
+-- UPDATE users SET github_username = "craigjbass" where first_name = "Craig";
+-- UPDATE users SET github_username = "RoryMacDonald" where first_name = "Rory";
+-- UPDATE users SET github_username = "sowasred2012" where first_name = "Scott";
+-- UPDATE users SET github_username = "SebAshton" where first_name = "Seb";
+-- UPDATE users SET github_username = "RyanMacG" where first_name = "Ryan";
