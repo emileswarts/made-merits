@@ -50,7 +50,7 @@ ON
 SELECT id FROM users where github_username = :github-username
 
 -- :name persist-boyscouting-results! :! :n
-INSERT INTO boyscouting (project, user_id, boyscouting_count) VALUES (:project, :user_id, :boyscouting_count)
+INSERT INTO boyscouting (project, user_id, pr_number) VALUES (:project, :user_id, :pr_number)
 
--- :name reset-boyscouting! :!
-Delete from boyscouting where 1;
+-- :name new-boyscouting?
+SELECT id FROM boyscouting where pr_number = :pr_number
