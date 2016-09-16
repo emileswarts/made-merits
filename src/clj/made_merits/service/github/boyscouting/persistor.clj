@@ -8,14 +8,17 @@
     (hash-map
       :github-username username)))
 
+(defn persist-result
+  [row result]
+  (db/persist-boyscouting-results!
+    (hash-map
+      :project (:project row)
+      :pr_number (:number result)
+      :user_id (:id (first (user-id (:user result)))))))
+
 (defn persist-boyscouting-results
   [results]
-  (db/reset-boyscouting!)
-
   (doseq [row results]
     (doseq [result (:results row)]
-      (db/persist-boyscouting-results!
-        (hash-map
-          :project (:project row)
-          :user_id (:id (first (user-id (:user result))))
-          :boyscouting_count (:boyscouting-count result))))))
+      (if (empty? (db/new-boyscouting? (hash-map :pr_number (:number result))))
+        (persist-result row result)))))

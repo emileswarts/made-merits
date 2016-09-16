@@ -1,11 +1,12 @@
 (ns made-merits.test.service.boyscouting-detector
   (:require [clojure.test :refer :all]
-            [made-merits.service.github.boyscouting.detector :refer :all]))
+           [made-merits.service.github.boyscouting.detector :refer :all]))
 
 (deftest detected-boyscouting-test
 
   (testing "No match"
     (let [pr-payload "[{
+                        \"merged_at\": \"2011-01-26T19:01:12Z\",
                         \"user\": {
                           \"login\": \"emileswarts\"
                         },
@@ -14,24 +15,25 @@
       (is (= [] (detect pr-payload)))))
 
   (testing "Single boyscouting detected"
-    (let [pr-payload "[
-                        {
-                          \"user\": {
+    (let [pr-payload "[{
+                        \"number\": 1347,
+                        \"user\": {
                           \"login\": \"emileswarts\"
                         },
                           \"body\": \"testing github api 🔥 \",
                         }
                      ]"]
-      (is (= [{:user "emileswarts" :boyscouting-count 1}] (detect pr-payload)))))
+      (is (= [{:user "emileswarts" :number 1347}] (detect pr-payload)))))
 
   (testing "Multiple boyscouting detections"
-    (let [pr-payload "[
-                        {
+    (let [pr-payload "[{
+                          \"number\": 1347,
                           \"user\": {
                             \"login\": \"emileswarts\"
                           },
                           \"body\": \"testing github api 🔥 \",
                         }, {
+                          \"number\": 1348,
                           \"user\": {
                             \"login\": \"emileswarts\"
                           },
@@ -43,51 +45,57 @@
                           \"body\": \"Just some boring commit\",
                         },
                      ]"]
-      (is (= [{:user "emileswarts" :boyscouting-count 2}] (detect pr-payload)))))
+      (is (= [{:user "emileswarts" :number 1347} {:user "emileswarts" :number 1348}] (detect pr-payload)))))
 
   (testing "Multiple boyscouting detections for multiple users"
-    (let [pr-payload "[
-                     {
-                     \"user\": {
-                      \"login\": \"emileswarts\"
-                      },
+    (let [pr-payload "[{
+                     \"number\": 1347,
                      \"body\": \"testing github api 🔥 \",
-                     }, {
                      \"user\": {
-                     \"login\": \"chris\"
-                      },
-                     \"body\": \"Clean up documentation 🔥 \",
+                        \"login\": \"emileswarts\"
+                     },
                      }, {
-                     \"user\": {
-                     \"login\": \"emile\"
+                      \"number\": 1348,
+                      \"body\": \"Clean up documentation 🔥 \",
+                      \"user\": {
+                        \"login\": \"chris\"
                       },
-                     \"body\": \"Just some boring commit\",
+                     }, {
+                      \"number\": 1349,
+                      \"body\": \"Just some boring commit\",
+                      \"user\": {
+                          \"login\": \"emile\"
+                        },
                      },
                      ]"]
-      (is (= [{:user "emileswarts" :boyscouting-count 1} {:user "chris" :boyscouting-count 1}] (detect pr-payload)))))
+      (is (= [{:user "emileswarts" :number 1347} {:user "chris" :number 1348}] (detect pr-payload)))))
 
   (testing "Multiple boyscouting detections for multiple users"
-    (let [pr-payload "[
-                     {
-                     \"user\": {
-                      \"login\": \"emileswarts\"
-                      },
+    (let [pr-payload "[{
+                     \"number\": 1347,
                      \"body\": \"testing github api 🔥 \",
-                     }, {
                      \"user\": {
-                      \"login\": \"emileswarts\"
+                        \"login\": \"emileswarts\"
                       },
+                     }, {
+                     \"number\": 1348,
                      \"body\": \"refactor 🔥 \",
-                     }, {
                      \"user\": {
-                     \"login\": \"chris\"
+                        \"login\": \"emileswarts\"
                       },
-                     \"body\": \"Clean up documentation 🔥 \",
                      }, {
-                     \"user\": {
-                     \"login\": \"emile\"
+                      \"number\": 1349,
+                      \"body\": \"Clean up documentation 🔥 \",
+                      \"user\": {
+                        \"login\": \"chris\"
                       },
-                     \"body\": \"Just some boring commit\",
-                     },
-                     ]"]
-      (is (= [{:user "emileswarts" :boyscouting-count 2} {:user "chris" :boyscouting-count 1}] (detect pr-payload))))))
+                     }, {
+                      \"number\": 1351,
+                      \"body\": \"Just some boring commit\",
+                      \"user\": {
+                          \"login\": \"emile\"
+                      }
+                     }]"]
+      (is (= [ {:user "emileswarts" :number 1347}
+              {:user "emileswarts" :number 1348}
+              {:user "chris" :number 1349} ] (detect pr-payload))))))
