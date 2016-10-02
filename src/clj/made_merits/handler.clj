@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [routes wrap-routes]]
             [made-merits.layout :refer [error-page]]
             [made-merits.routes.leaderboard :refer [leaderboard-routes]]
+            [made-merits.routes.kudos :refer [kudos-routes]]
             [made-merits.routes.merits :refer [merits-routes]]
             [made-merits.routes.github-boyscouting-scraper :refer [boyscouting-routes]]
             [compojure.route :as route]
@@ -20,6 +21,8 @@
 
 (def app-routes
   (routes
+    (-> #'kudos-routes
+        (wrap-routes middleware/wrap-formats))
     (-> #'leaderboard-routes
         (wrap-routes middleware/wrap-formats))
     (-> #'boyscouting-routes

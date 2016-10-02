@@ -27,6 +27,18 @@ SELECT * FROM merits
 -- :doc Add merit to user
 INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 
+-- :name add-kudos :! :n
+-- :doc Add merit to user
+INSERT INTO kudoses (username, kudosed_by, reason) VALUES (:username, :kudosed_by, :reason)
+
+-- :name delete-all-kudoses :!
+-- :doc Truncate kudoses table
+DELETE FROM kudoses WHERE 1;
+
+-- :name get-kudoses
+-- :doc Get kudos
+SELECT * FROM kudoses;
+
 -- :name get-meritted-users
 -- :doc Get users in the leaderboard
 SELECT
