@@ -27,6 +27,10 @@ SELECT * FROM merits
 -- :doc Add merit to user
 INSERT INTO users_merits (user_id, merit_id) VALUES (:user_id, :merit_id)
 
+-- :name kudos-count :? :username
+-- :doc Count kudos users
+SELECT COUNT(*) as kudos_count from kudoses where username = :username
+
 -- :name add-kudos :! :n
 -- :doc Add merit to user
 INSERT INTO kudoses (username, kudosed_by, reason) VALUES (:username, :kudosed_by, :reason)

@@ -11,12 +11,13 @@
 (use-fixtures :each truncate-kudos-table)
 
 (deftest successful-post
-  (kudos-controller/create (mock/content-type
+  (is (= (kudos-controller/create (mock/content-type
                              (mock/request
                                :post
                                "/kudos"
                                (clojure.data.json/write-str {:username "@alex" :text "@emile so cool"} ))
                              "application/json"))
+      "@alex gave @emile a merit! @emile now has 1 merit"))
 
   (let [kudos-result (first (db/get-kudoses))]
     (is (= "@emile" (:username kudos-result)))

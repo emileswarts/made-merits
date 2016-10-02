@@ -17,9 +17,12 @@
     (if (= kudosed-user kudosed-by)
       {:status 200, :headers {}, :body "You cannot kudos yourself! This incident will be reported!"}
 
-      (db/add-kudos {:username kudosed-user
-                     :kudosed_by kudosed-by
-                     :reason reason }))))
+      (if (db/add-kudos {:username kudosed-user
+                         :kudosed_by kudosed-by
+                         :reason reason })
+        (str
+          kudosed-by " gave " kudosed-user " a merit! " kudosed-user " now has "
+          (:kudos_count (first (db/kudos-count {:username kudosed-user}))) " merit")))))
 
 (defroutes kudos-routes
   (POST "/kudos" [params] (create)))
