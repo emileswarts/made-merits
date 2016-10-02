@@ -6,23 +6,31 @@
             [clojure.string :as str]
             [clojure.java.io :as io]))
 
+(defn cheating-detected?
+  [kudosed-user kudosed-by]
+  (= kudosed-user kudosed-by))
+
+(def cheating-detected-response
+  {:status 200, :headers {}, :body "You cannot kudos yourself! This incident will be reported!"})
+
+(defn kudosed-response
+  [kudosed-by kudosed-user]
+  (str kudosed-by " gave " kudosed-user " a merit! " kudosed-user " now has "
+    (:kudos_count (first (db/kudos-count {:username kudosed-user}))) " merit"))
+
 (defn create
   [params]
   (let [parsed-params (json/parse-string (slurp (:body params)))
         payload-array (str/split (get parsed-params "text") #" ")
-        kudosed-user (first payload-array)
-        kudosed-by (get parsed-params "username")
-        reason (str/join " " (rest payload-array))]
+        kudosed-user  (first payload-array)
+        kudosed-by    (get parsed-params "username")
+        reason        (str/join " " (rest payload-array))]
 
-    (if (= kudosed-user kudosed-by)
-      {:status 200, :headers {}, :body "You cannot kudos yourself! This incident will be reported!"}
+    (if (cheating-detected? kudosed-user kudosed-by)
+      cheating-detected-response
 
-      (if (db/add-kudos {:username kudosed-user
-                         :kudosed_by kudosed-by
-                         :reason reason })
-        (str
-          kudosed-by " gave " kudosed-user " a merit! " kudosed-user " now has "
-          (:kudos_count (first (db/kudos-count {:username kudosed-user}))) " merit")))))
+      (if (db/add-kudos {:username kudosed-user :kudosed_by kudosed-by :reason reason })
+        (kudosed-response kudosed-by kudosed-user)))))
 
 (defroutes kudos-routes
   (POST "/kudos" [params] (create)))
