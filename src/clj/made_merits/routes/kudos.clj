@@ -26,6 +26,9 @@
         kudosed-by    (get parsed-params "username")
         reason        (str/join " " (rest payload-array))]
 
+    (if (= kudosed-user "@Steve")
+      {:status 200, :headers {}, :body "No merits for steve! He knows what he did..."}
+    
     (if (cheating-detected? kudosed-user kudosed-by)
       cheating-detected-response
 
